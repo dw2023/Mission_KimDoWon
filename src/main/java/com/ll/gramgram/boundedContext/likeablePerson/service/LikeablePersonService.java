@@ -6,12 +6,15 @@ import com.ll.gramgram.boundedContext.instaMember.service.InstaMemberService;
 import com.ll.gramgram.boundedContext.likeablePerson.entity.LikeablePerson;
 import com.ll.gramgram.boundedContext.likeablePerson.repository.LikeablePersonRepository;
 import com.ll.gramgram.boundedContext.member.entity.Member;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
+@Getter
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -47,5 +50,15 @@ public class LikeablePersonService {
 
     public List<LikeablePerson> findByFromInstaMemberId(Long fromInstaMemberId) {
         return likeablePersonRepository.findByFromInstaMemberId(fromInstaMemberId);
+    }
+
+    @Transactional
+    public void delete(LikeablePerson likeablePerson) {
+        likeablePersonRepository.delete(likeablePerson);
+    }
+
+    public LikeablePerson getLikeablePerson(Integer id) {
+        Optional<LikeablePerson> likeablePerson = likeablePersonRepository.findById(id);
+            return likeablePerson.get();
     }
 }
