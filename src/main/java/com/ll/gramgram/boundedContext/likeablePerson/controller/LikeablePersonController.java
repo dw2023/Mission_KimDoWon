@@ -62,7 +62,7 @@ public class LikeablePersonController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
+    public String delete(@PathVariable("id") Long id) {
 
         LikeablePerson likeablePerson = likeablePersonService.getLikeablePerson(id);
 

@@ -57,7 +57,7 @@ public class LikeablePersonService {
         likeablePersonRepository.delete(likeablePerson);
     }
 
-    public LikeablePerson getLikeablePerson(Integer id) {
+    public LikeablePerson getLikeablePerson(Long id) {
         Optional<LikeablePerson> likeablePerson = likeablePersonRepository.findById(id);
             return likeablePerson.get();
     }
