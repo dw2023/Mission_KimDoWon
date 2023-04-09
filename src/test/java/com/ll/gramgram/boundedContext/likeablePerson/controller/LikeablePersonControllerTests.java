@@ -171,7 +171,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(redirectedUrlPattern("/likeablePerson/list**"))
         ;
 
-        // 삭제완료 후 id기 1번인 호감은 존재하지 않아야 한다
+        // 삭제완료 후 id가 1번인 호감은 존재하지 않아야 한다
         assertThat(likeablePersonService.findById(1L).isPresent()).isEqualTo(false);
     }
 }
