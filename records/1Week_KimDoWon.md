@@ -9,8 +9,7 @@
     - [x] 삭제 후 다시 호감목록 페이지로 이동 (rq.redirectWithMsg 함수 사용)
     - [x] 삭제 버튼 style 적용
 
-- 테스트케이스 작성
-    - [ ] 호감상대 추가
+- [ ] 테스트케이스 작성
     - [ ] 호감상대 삭제
 
 
@@ -25,6 +24,7 @@
 
 - 목표: 삭제권한 체크 후 삭제처리 & 확인창 보여주기
 
+
 1. 호감상대 삭제 기능 구현
 - @GetMapping 어노테이션을 사용하여 LikeablePersonController의 delete() 메서드를 list.html에서 요청된 URL과 매핑
 - 요청된 URL에서 `[likeablePerson.id](http://likeablePerson.id)` 는 Controller의 매개변수로 받을 때 likeablePerson. 없이 id만 작성해야 함
@@ -34,14 +34,15 @@
 - rq의 getMember() 메서드를 사용하여 현재 로그인한 Member의 객체를 가져와서 likeablePerson 객체 안의 FromInstaMember의 id와 일치하는지 확인하기
 - `rq.redirectWithMsg()`를 활용하여 메세지 출력하고 호감목록으로 이동하기
 
+
 2. 테스트케이스 작성
 - MockMvc 클래스와 resultActions 클래스 등을 다루는 것이 어려워 미완료
 
 
 **[특이사항]**
 
-- 삭제 권한 체크하는 코드에서 if문의 조건식을 잘못 작성하였을 때, 호감표시와 호감목록에 접속이 안되는 오류가 발생하였습니다.
-    - 호감표시와 관련된 코드가 없는데 왜 호감표시까지 오류발생하는지 궁금합니다.
+- test에 .param 입력하는 것이 어려움
 
-**Refactoring**
+
+**[Refactoring]**
 - 삭제 완료 후 뜨는 확인창 표시시간 줄이기
