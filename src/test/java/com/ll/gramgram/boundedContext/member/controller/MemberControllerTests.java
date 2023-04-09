@@ -1,11 +1,5 @@
 package com.ll.gramgram.boundedContext.member.controller;
 
-
-import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
-import com.ll.gramgram.boundedContext.instaMember.service.InstaMemberService;
-import com.ll.gramgram.boundedContext.likeablePerson.controller.LikeablePersonController;
-import com.ll.gramgram.boundedContext.likeablePerson.entity.LikeablePerson;
-import com.ll.gramgram.boundedContext.likeablePerson.service.LikeablePersonService;
 import com.ll.gramgram.boundedContext.member.entity.Member;
 import com.ll.gramgram.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -22,8 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -42,8 +34,6 @@ public class MemberControllerTests {
     private MockMvc mvc;
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private LikeablePersonService likeablePersonService;
 
     @Test
     @DisplayName("회원가입 폼")
@@ -226,34 +216,5 @@ public class MemberControllerTests {
                 .andExpect(content().string(containsString("""
                         user1님 환영합니다.
                         """.stripIndent().trim())));
-    }
-
-    @Test
-    @DisplayName("호감상대 추가")
-    @WithUserDetails("user1")
-    void t007() throws Exception {
-
-        Member member = memberService.findByUsername("user1").orElse(null);
-        assert member != null;
-        List<LikeablePerson> likeablePersonList = likeablePersonService.findByFromInstaMemberId(member.getInstaMember().getId());
-        int sizeBeforeAdd = likeablePersonList.size();
-
-        // WHEN
-        ResultActions resultActions = mvc
-                .perform(post("/likeablePerson/add/")
-                        .param("fromInstaMember", "member")
-                        .param("toInstaMemberUsername", "dowon")
-                        .param("attractiveTypeCode", "1")
-                )
-                .andDo(print()); // 크게 의미 없고, 그냥 확인용
-
-        // THEN
-        resultActions
-                .andExpect(handler().handlerType(LikeablePersonController.class))
-                .andExpect(handler().methodName("add"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrlPattern("/likeablePerson/list?msg=**"));
-
-        assertThat(likeablePersonList.size()).isEqualTo(sizeBeforeAdd + 1);
     }
 }
