@@ -28,10 +28,12 @@ public class LikeablePerson {
     private LocalDateTime modifyDate;
 
     @ManyToOne
+    @ToString.Exclude // 양방향을 걸면, 여기에 달아주는게 보통이다. 이렇게 해야 무한재귀가 실행되지 않는다.
     private InstaMember fromInstaMember; // 호감을 표시한 사람(인스타 멤버)
     private String fromInstaMemberUsername; // 혹시 몰라서 기록
 
     @ManyToOne
+    @ToString.Exclude // 양방향을 걸면, 여기에 달아주는게 보통이다. 이렇게 해야 무한재귀가 실행되지 않는다.
     private InstaMember toInstaMember; // 호감을 받은 사람(인스타 멤버)
     private String toInstaMemberUsername; // 혹시 몰라서 기록
 
