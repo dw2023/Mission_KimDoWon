@@ -43,7 +43,11 @@ public class LikeablePersonController {
 
         RsData canActorAddRsData = likeablePersonService.canActorAdd(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
 
-        if (canActorAddRsData.isFail()) return rq.historyBack(canActorAddRsData);
+        if (canActorAddRsData.isFail()) {
+            return rq.historyBack(canActorAddRsData);
+        } else if (canActorAddRsData.getResultCode().equals("S-2")) {
+            return rq.redirectWithMsg("/likeablePerson/list", canActorAddRsData);
+        }
 
         RsData<LikeablePerson> createRsData = likeablePersonService.like(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
 
