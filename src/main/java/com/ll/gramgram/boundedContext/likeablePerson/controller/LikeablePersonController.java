@@ -41,7 +41,7 @@ public class LikeablePersonController {
     @PostMapping("/add")
     public String add(@Valid AddForm addForm) {
 
-        RsData canActorAddRsData = likeablePersonService.canActorAdd(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
+        RsData canActorAddRsData = likeablePersonService.canActorLike(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
 
         if (canActorAddRsData.isFail()) {
             return rq.historyBack(canActorAddRsData);

@@ -87,17 +87,24 @@ public class LikeablePersonService {
     }
 
     @Transactional
-    public RsData canActorAdd(Member actor, String instaUsername, int attractiveTypeCode) {
+    public RsData canActorLike(Member actor, String instaUsername, int attractiveTypeCode) {
 
-        // 로그인한 인스타멤버가 지금까지 호감표시한 사람들 목록
+        // 로그인한 인스타멤버가 좋아하는 사람들 목록
         List<LikeablePerson> fromLikeablePeople = actor.getInstaMember().getFromLikeablePeople();
 
+        // 케이스 5
+        if (fromLikeablePeople.size() >= 10) {
+            return RsData.of("F-4", "호감표시는 10명까지만 가능합니다.");
+        }
+
         for (LikeablePerson likeablePerson : fromLikeablePeople) {
+
+            // 케이스 6
             if (likeablePerson.getToInstaMemberUsername().equals(instaUsername)) {
 
-                if (likeablePerson.getAttractiveTypeCode() == attractiveTypeCode) {
+                // 케이스 4
+                if (likeablePerson.getAttractiveTypeCode() == attractiveTypeCode)
                     return RsData.of("F-3", "이미 존재하는 호감표시입니다.");
-                }
 
                 // 변경 전 호감사유 가져오기
                 String oldAttractiveTypeName = likeablePerson.getAttractiveTypeDisplayName();
