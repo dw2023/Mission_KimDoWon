@@ -85,4 +85,22 @@ public class LikeablePersonService {
 
         return RsData.of("S-1", "삭제가능합니다.");
     }
+
+    public RsData canActorAdd(Member actor, String instaUsername, int attractiveTypeCode) {
+        // 기존에 사용자가 호감표시한 사람들 목록
+        List<LikeablePerson> toLikeablePeople = actor.getInstaMember().getToLikeablePeople();
+
+        for (LikeablePerson toLikeablePerson : toLikeablePeople) {
+            if (toLikeablePerson.getToInstaMemberUsername().equals(instaUsername)) {
+
+                if (toLikeablePerson.getAttractiveTypeCode() == attractiveTypeCode) {
+                    return RsData.of("F-3", "이미 동일한 호감표시가 존재합니다.");
+                }
+
+                return RsData.of("F-4", "기존의 호감표시의 사유가 변경되었습니다.");
+            }
+        }
+
+        return RsData.of("S-1", "호감표시 가능합니다.");
+    }
 }
