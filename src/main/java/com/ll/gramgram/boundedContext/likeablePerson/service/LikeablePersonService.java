@@ -92,13 +92,6 @@ public class LikeablePersonService {
 
         // 로그인한 인스타멤버의 id
         long actorInstaMemberId = actor.getInstaMember().getId();
-        // 로그인한 인스타멤버가 좋아하는 사람 리스트
-        List<LikeablePerson> likeablePeople = likeablePersonRepository.findByFromInstaMemberId(actorInstaMemberId);
-
-        // 케이스 5
-        if (likeablePeople.size() >= AppConfig.getLikeablePersonFromMax()) {
-            return RsData.of("F-4", "호감표시는 10명까지만 가능합니다.");
-        }
 
         LikeablePerson likeablePerson = likeablePersonRepository.findByFromInstaMemberIdAndToInstaMember_username(actorInstaMemberId, instaUsername);
 
@@ -115,6 +108,22 @@ public class LikeablePersonService {
 
             return RsData.of("S-2", "%s님에 대한 호감 사유를 %s에서 %s(으)로 변경합니다.".formatted(instaUsername, oldAttractiveTypeName, newAttractiveTypeName));
         }
+    }
+
+    // 케이스 5
+    @Transactional
+    public RsData checkMax(Member actor) {
+
+        // 로그인한 인스타멤버의 id
+        long actorInstaMemberId = actor.getInstaMember().getId();
+        // 로그인한 인스타멤버가 좋아하는 사람 리스트
+        List<LikeablePerson> likeablePeople = likeablePersonRepository.findByFromInstaMemberId(actorInstaMemberId);
+
+        if (likeablePeople.size() >= AppConfig.getLikeablePersonFromMax()) {
+            return RsData.of("F-4", "호감표시는 10명까지만 가능합니다.");
+        }
+
+        return RsData.of("S-1", "호감표시 가능합니다.");
     }
 }
 

@@ -41,13 +41,19 @@ public class LikeablePersonController {
     @PostMapping("/add")
     public String add(@Valid AddForm addForm) {
 
-        RsData canActorAddRsData = likeablePersonService.canActorLike(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
+        // 케이스 4, 6
+        RsData canActorLikeRsData = likeablePersonService.canActorLike(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
 
-        if (canActorAddRsData.isFail()) {
-            return rq.historyBack(canActorAddRsData);
-        } else if (canActorAddRsData.getResultCode().equals("S-2")) {
-            return rq.redirectWithMsg("/likeablePerson/list", canActorAddRsData);
+        if (canActorLikeRsData.isFail()) {
+            return rq.historyBack(canActorLikeRsData);
+        } else if (canActorLikeRsData.getResultCode().equals("S-2")) {
+            return rq.redirectWithMsg("/likeablePerson/list", canActorLikeRsData);
         }
+
+        // 케이스 5
+        RsData checkMaxRsData = likeablePersonService.checkMax(rq.getMember());
+
+        if (checkMaxRsData.isFail()) return rq.historyBack(checkMaxRsData);
 
         RsData<LikeablePerson> createRsData = likeablePersonService.like(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
 
