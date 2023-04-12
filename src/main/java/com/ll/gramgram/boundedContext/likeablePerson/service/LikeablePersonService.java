@@ -99,7 +99,7 @@ public class LikeablePersonService {
             return RsData.of("S-1", "호감표시 가능합니다.");
 
         } else if (likeablePerson.getAttractiveTypeCode() == attractiveTypeCode) {
-            return RsData.of("F-3", "%s님에 대한 동일한 호감표시가 이미 호감목록에 있습니다.".formatted(instaUsername));
+            return RsData.of("F-3", "%s님에 대한 동일한 호감표시가 이미 존재합니다.".formatted(instaUsername));
 
         } else {
             String oldAttractiveTypeName = likeablePerson.getAttractiveTypeDisplayName(); // 변경 전 호감사유 가져오기 (msg 출력용)
@@ -110,8 +110,6 @@ public class LikeablePersonService {
         }
     }
 
-    // 케이스 5
-    @Transactional
     public RsData checkMax(Member actor) {
 
         // 로그인한 인스타멤버의 id

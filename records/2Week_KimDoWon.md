@@ -32,17 +32,28 @@
 구현 순서: Case 4 → Case 6 → Case 5
 
 Case 4
-- 
+- likeablePersonService에 `canActorLike` 메서드 구현
+- likeablePersonRepository의 `findByFromInstaMemberIdAndToInstaMember_username 사용
+  - 현재 로그인한 인스타 멤버(FromInstaMemberId)의 id와 새로 입력한 username(ToInstaMember_username), 두 개의 데이터와 일치하는 likeablePerson 객체 찾기
+- likeablePerson 객체가 null일 경우, 동일한 호감표시가 존재하지 않으므로 S-1 리턴 
+- `likeablePerson.getAttractiveTypeCode() == attractiveTypeCode`
+  - 이 객체의 AttractiveTypeCode와 새로 입력한 attractiveTypeCode가 일치하면 F-3 리턴
+  - 일치하지 않으면 Case 6 
 
 Case 6
-- 수정: 스프링부트에서 `@Setter` 사용을 지양하라고 해서 구글링으로 다른 방법 찾아봄
+- 안전성을 위해 `@Setter`를 사용하는 대신 업데이트가 필요한 값만을 따로 변경하는 메서드 `updateAttractiveType`를 구현
+- 값의 변경이 발생하므로 `canActorLike` 메서드에 `@transactional` 붙이기
 
 Case 5
-- ㄴㅇㄹ
+- likeablePersonService에 `checkMax` 메서드 따로 구현
+
+<br/>
 
 **[특이사항]**
-- 
+- `checkMax` 메서드가 `canActorLike` 메서드보다 먼저 실행될 경우, Case 6은 새로운 호감상대를 추가하는 것이 아님에도 실행되지 않는다. 그래서 반드시 `checkMax` 메서드가 `canActorLike` 메서드보다 뒤에 위치해야 함
 
+<br/>
 
 **[Refactoring]**
-- 
+- 선택미션 네이버 로그인 구현하기
+- stream을 활용하여 코드 가독성 높이기
