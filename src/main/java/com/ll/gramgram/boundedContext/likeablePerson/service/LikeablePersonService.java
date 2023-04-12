@@ -1,5 +1,6 @@
 package com.ll.gramgram.boundedContext.likeablePerson.service;
 
+import com.ll.gramgram.base.appConfig.AppConfig;
 import com.ll.gramgram.base.rsData.RsData;
 import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import com.ll.gramgram.boundedContext.instaMember.service.InstaMemberService;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Getter
@@ -93,13 +93,13 @@ public class LikeablePersonService {
         List<LikeablePerson> fromLikeablePeople = actor.getInstaMember().getFromLikeablePeople();
 
         // 케이스 5
-        if (fromLikeablePeople.size() >= 10) {
+        if (fromLikeablePeople.size() >= AppConfig.getLikeablePersonFromMax()) {
             return RsData.of("F-4", "호감표시는 10명까지만 가능합니다.");
         }
 
         // 케이스 4, 6
         for (LikeablePerson likeablePerson : fromLikeablePeople) {
-            if (likeablePerson.getToInstaMemberUsername().equals(instaUsername)) {
+            if (likeablePerson.getToInstaMember().getUsername().equals(instaUsername)) {
 
                 // 케이스 4
                 if (likeablePerson.getAttractiveTypeCode() == attractiveTypeCode)
@@ -112,7 +112,6 @@ public class LikeablePersonService {
                 return RsData.of("S-2", "%s님에 대한 호감 사유를 %s에서 %s(으)로 변경합니다.".formatted(instaUsername, oldAttractiveTypeName, likeablePerson.getAttractiveTypeDisplayName()));
             }
         }
-
         return RsData.of("S-1", "호감표시 가능합니다.");
     }
 }
