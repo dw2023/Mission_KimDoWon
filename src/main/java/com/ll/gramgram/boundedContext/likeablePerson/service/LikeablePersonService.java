@@ -75,9 +75,9 @@ public class LikeablePersonService {
     public RsData canActorDelete(Member actor, LikeablePerson likeablePerson) {
         if (likeablePerson == null) return RsData.of("F-1", "이미 삭제되었습니다.");
 
-        // 수행자의 인스타계정 번호
+        // 로그인한 인스타멤버의 id
         long actorInstaMemberId = actor.getInstaMember().getId();
-        // 삭제 대상의 작성자(호감표시한 사람)의 인스타계정 번호
+        // 삭제하려는 호감표시 작성자의 인스타멤버 id
         long fromInstaMemberId = likeablePerson.getFromInstaMember().getId();
 
         if (actorInstaMemberId != fromInstaMemberId)
@@ -89,16 +89,18 @@ public class LikeablePersonService {
     @Transactional
     public RsData canActorLike(Member actor, String instaUsername, int attractiveTypeCode) {
 
+        // 로그인한 인스타멤버의 id
+        long actorInstaMemberId = actor.getInstaMember().getId();
         // 로그인한 인스타멤버가 좋아하는 사람들 목록
-        List<LikeablePerson> fromLikeablePeople = actor.getInstaMember().getFromLikeablePeople();
+        List<LikeablePerson> likeablePeople = likeablePersonRepository.findByFromInstaMemberId(actorInstaMemberId);
 
         // 케이스 5
-        if (fromLikeablePeople.size() >= AppConfig.getLikeablePersonFromMax()) {
+        if (likeablePeople.size() >= AppConfig.getLikeablePersonFromMax()) {
             return RsData.of("F-4", "호감표시는 10명까지만 가능합니다.");
         }
 
         // 케이스 4, 6
-        for (LikeablePerson likeablePerson : fromLikeablePeople) {
+        for (LikeablePerson likeablePerson : likeablePeople) {
             if (likeablePerson.getToInstaMember().getUsername().equals(instaUsername)) {
 
                 // 케이스 4
