@@ -97,30 +97,22 @@ public class LikeablePersonService {
             return RsData.of("F-4", "호감표시는 10명까지만 가능합니다.");
         }
 
+        // 케이스 4, 6
         for (LikeablePerson likeablePerson : fromLikeablePeople) {
-
-            // 케이스 6
             if (likeablePerson.getToInstaMemberUsername().equals(instaUsername)) {
 
                 // 케이스 4
                 if (likeablePerson.getAttractiveTypeCode() == attractiveTypeCode)
-                    return RsData.of("F-3", "이미 존재하는 호감표시입니다.");
+                    return RsData.of("F-3", "동일한 호감표시가 이미 호감목록에 있습니다.");
 
-                // 변경 전 호감사유 가져오기
-                String oldAttractiveTypeName = likeablePerson.getAttractiveTypeDisplayName();
-
-                // 호감사유 변경하기
-                modify(likeablePerson, attractiveTypeCode);
+                // 케이스 6
+                String oldAttractiveTypeName = likeablePerson.getAttractiveTypeDisplayName(); // 변경 전 호감사유 가져오기 (msg 출력용)
+                likeablePerson.updateAttractiveType(attractiveTypeCode); // 호감사유 변경하기
 
                 return RsData.of("S-2", "%s님에 대한 호감 사유를 %s에서 %s(으)로 변경합니다.".formatted(instaUsername, oldAttractiveTypeName, likeablePerson.getAttractiveTypeDisplayName()));
             }
         }
 
         return RsData.of("S-1", "호감표시 가능합니다.");
-    }
-
-    @Transactional
-    public void modify(LikeablePerson likeablePerson, int attractiveTypeCode) {
-        likeablePerson.updateAttractiveType(attractiveTypeCode);
     }
 }
