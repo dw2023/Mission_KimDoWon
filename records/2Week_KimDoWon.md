@@ -50,7 +50,7 @@ Case 5
 <br/>
 
 **[특이사항]**
-- `checkMax` 메서드가 `canActorLike` 메서드보다 먼저 실행될 경우, Case 6은 새로운 호감상대를 추가하는 것이 아님에도 실행되지 않는다. 그래서 반드시 `checkMax` 메서드가 `canActorLike` 메서드보다 뒤에 위치해야 함
+- 10개의 호감표시가 존재할 때 `checkMax` 메서드가 `canActorLike` 메서드보다 먼저 실행될 경우, Case 6은 새로운 호감상대를 추가하는 것이 아님에도 실행되지 않는다. 그래서 반드시 `checkMax` 메서드가 `canActorLike` 메서드보다 뒤에 위치해야 함
 
 <br/>
 
