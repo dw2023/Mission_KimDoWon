@@ -4,6 +4,7 @@ import com.ll.gramgram.base.rq.Rq;
 import com.ll.gramgram.base.rsData.RsData;
 import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import com.ll.gramgram.boundedContext.likeablePerson.entity.LikeablePerson;
+import com.ll.gramgram.boundedContext.likeablePerson.repository.LikeablePersonRepository;
 import com.ll.gramgram.boundedContext.likeablePerson.service.LikeablePersonService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -39,13 +40,13 @@ public class LikeablePersonController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
     public String add(@Valid AddForm addForm) {
-        RsData<LikeablePerson> createRsData = likeablePersonService.like(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
+        RsData<LikeablePerson> rsData = likeablePersonService.like(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
 
-        if (createRsData.isFail()) {
-            return rq.historyBack(createRsData);
+        if (rsData.isFail()) {
+            return rq.historyBack(rsData);
         }
 
-        return rq.redirectWithMsg("/likeablePerson/list", createRsData);
+        return rq.redirectWithMsg("/likeablePerson/list", rsData);
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -69,7 +70,7 @@ public class LikeablePersonController {
     public String delete(@PathVariable Long id) {
         LikeablePerson likeablePerson = likeablePersonService.findById(id).orElse(null);
 
-        RsData canActorDeleteRsData = likeablePersonService.canActorDelete(rq.getMember(), likeablePerson);
+        RsData canActorDeleteRsData = likeablePersonService.canDelete(rq.getMember(), likeablePerson);
 
         if (canActorDeleteRsData.isFail()) return rq.historyBack(canActorDeleteRsData);
 
