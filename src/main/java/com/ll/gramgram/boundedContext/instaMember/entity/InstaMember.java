@@ -23,7 +23,8 @@ public class InstaMember extends BaseEntity {
     @Setter
     private String gender;
 
-    @OneToMany(mappedBy = "fromInstaMember", cascade = {CascadeType.ALL}) // LikeablePerson 엔티티에서 InstaMember 엔티티를 참조한 속성명 fromInstaMember
+    @OneToMany(mappedBy = "fromInstaMember", cascade = {CascadeType.ALL})
+    // LikeablePerson 엔티티에서 InstaMember 엔티티를 참조한 속성명 fromInstaMember
     @OrderBy("id desc") // 정렬 (LikeablePerson의 id)
     @LazyCollection(LazyCollectionOption.EXTRA) // fromLikeablePeople의 size를 구할 때 count() 실행
     @Builder.Default // @Builder 가 있으면 `= new ArrayList<>();` 가 작동하지 않는다. 그래서 이걸 붙여야 한다.

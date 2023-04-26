@@ -1,4 +1,5 @@
 package com.ll.gramgram.boundedContext.likeablePerson.service;
+
 import com.ll.gramgram.base.appConfig.AppConfig;
 import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import com.ll.gramgram.boundedContext.likeablePerson.entity.LikeablePerson;
@@ -9,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
@@ -19,6 +23,7 @@ public class LikeablePersonServiceTests {
     private LikeablePersonService likeablePersonService;
     @Autowired
     private LikeablePersonRepository likeablePersonRepository;
+
     @Test
     @DisplayName("테스트 1")
     void t001() throws Exception {
@@ -52,6 +57,7 @@ public class LikeablePersonServiceTests {
             assertThat(instaMemberInstaUser3.getUsername()).isEqualTo(likeablePerson.getFromInstaMember().getUsername());
         }
     }
+
     @Test
     @DisplayName("테스트 2")
     void t002() throws Exception {
@@ -111,12 +117,14 @@ public class LikeablePersonServiceTests {
             System.out.println("v4 : 기존 호감사유 : %s".formatted(oldLikeablePerson.getAttractiveTypeDisplayName()));
         }
     }
+
     @Test
     @DisplayName("설정파일에 있는 최대가능호감표시 수 가져오기")
     void t003() throws Exception {
         long likeablePersonFromMax = AppConfig.getLikeablePersonFromMax();
         assertThat(likeablePersonFromMax).isEqualTo(10);
     }
+
     @Test
     @DisplayName("테스트 4")
     void t004() throws Exception {
