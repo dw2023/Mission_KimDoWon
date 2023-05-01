@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,6 +19,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @ToString(callSuper = true)
 public class LikeablePerson extends BaseEntity {
+    private LocalDateTime modifyUnlockDate;
 
     @ManyToOne
     @ToString.Exclude // 양방향을 걸면, 여기에 달아주는게 보통이다. 이렇게 해야 무한재귀가 실행되지 않는다.
