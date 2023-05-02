@@ -98,6 +98,10 @@ public class LikeablePersonService {
         if (actorInstaMemberId != fromInstaMemberId)
             return RsData.of("F-2", "권한이 없습니다.");
 
+        if (!likeablePerson.isModifyUnlocked()) {
+            return RsData.of("F-3", "호감표시/호감사유변경 후 3시간 동안은 호감을 취소할 수 없습니다.");
+        }
+
         return RsData.of("S-1", "삭제가능합니다.");
     }
 
@@ -215,6 +219,9 @@ public class LikeablePersonService {
             return RsData.of("F-2", "해당 호감표시를 취소할 권한이 없습니다.");
         }
 
+        if (!likeablePerson.isModifyUnlocked()) {
+            return RsData.of("F-3", "호감표시/호감사유변경 후 3시간 동안은 호감사유를 변경할 수 없습니다.");
+        }
 
         return RsData.of("S-1", "호감표시취소가 가능합니다.");
     }
