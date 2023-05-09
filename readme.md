@@ -11,7 +11,8 @@
   - [x] UI에서 쿨타임 안차면 수정/삭제 못 하도록
   - [x] UI에서 남은시간 표시
   - [x] LikeablePersonService::canCancel 에 쿨타임 체크 추가
-  - [ ] LikeablePersonService::canModifyLike 에 쿨타임 체크 추가
+  - [x] LikeablePersonService::canModifyLike 에 쿨타임 체크 추가
+  - [x] TC : 호감사유를 변경하면 쿨타임이 갱신된다. 실패, 해결
 - [x] 회원가입 폼
   - [x] 로그인 상태에서 들어올 수 없다.
   - [x] 폼이 있어야 한다.
