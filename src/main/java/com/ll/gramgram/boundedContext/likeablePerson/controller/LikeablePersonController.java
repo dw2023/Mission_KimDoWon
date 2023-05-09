@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -133,8 +134,9 @@ public class LikeablePersonController {
             // 해당 인스타회원이 좋아하는 사람들 목록
             Stream<LikeablePerson> likeablePeopleStream = instaMember.getToLikeablePeople().stream();
 
-            if (!gender.isEmpty()) {
-                likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
+            if (gender != null) {
+                if (!gender.isEmpty())
+                    likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
             }
 
             List<LikeablePerson> likeablePeople = likeablePeopleStream.collect(Collectors.toList());
