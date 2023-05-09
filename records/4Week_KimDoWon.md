@@ -54,15 +54,15 @@
 
 ![img_11.png](img_11.png)
 
-그러나 이 코드는 null값을 처리하지 않아 `/toList`로 접속할 경우에는 NullPointerException을 발생시킨다.
+그러나 이 코드는 gender의 null 값 체크를 하지 않아 `/toList`로 접속할 경우에는 NullPointerException을 발생시킨다.
 
 ![img_13.png](img_13.png)
 
-(3) 이중 if문을 사용하여 null 값 처리부터 먼저 해주면, 두 가지 URL에서 모두 잘 작동한다.
+(3) 이중 if문을 사용하여 null 값 체크부터 먼저 해주면, 두 가지 URL에서 모두 잘 작동한다.
 
 ![img_12.png](img_12.png)
 
-- 이 미션을 수행하면서 Null, Empty, Blank의 차이에 대해 다시 확실히 알고 넘어갈 수 있어서 좋았다!
+- 이 미션을 수행하면서 `Null/ Empty/ Blank`의 차이에 대해 다시 확실히 알고 넘어갈 수 있어서 좋았다!
 - 참고자료: https://velog.io/@sixhustle/null-empty-blank
 ![img_14.png](img_14.png)
 
@@ -80,11 +80,11 @@
 
 **[특이사항]**
 
-필수미션1
-- 
+
 
 <br/>
 
 **[Refactoring]**
 
-- 
+필수미션1
+- gender의 null 값 체크를 Optional을 사용해서 해보기 (더 깔끔할 것 같다)
