@@ -133,7 +133,7 @@ public class LikeablePersonController {
             // 해당 인스타회원이 좋아하는 사람들 목록
             Stream<LikeablePerson> likeablePeopleStream = instaMember.getToLikeablePeople().stream();
 
-            if (gender != null) {
+            if (!gender.isEmpty()) {
                 likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
             }
 
