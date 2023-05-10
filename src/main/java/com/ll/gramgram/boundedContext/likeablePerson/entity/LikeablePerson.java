@@ -35,6 +35,11 @@ public class LikeablePerson extends BaseEntity {
         return fromInstaMember.getToLikeablePeople().size();
     }
 
+    // 호감을 표시한 사람의 성별을 가져오는 메서드
+    public String getFromInstaMemberGender() {
+        return fromInstaMember.getGender();
+    }
+
     @ManyToOne
     @ToString.Exclude // 양방향을 걸면, 여기에 달아주는게 보통이다. 이렇게 해야 무한재귀가 실행되지 않는다.
     private InstaMember toInstaMember; // 호감을 받은 사람(인스타 멤버)
