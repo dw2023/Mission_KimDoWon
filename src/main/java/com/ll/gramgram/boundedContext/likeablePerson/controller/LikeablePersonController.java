@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -140,6 +141,29 @@ public class LikeablePersonController {
 
             if (attractiveTypeCode != 0) {
                 likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getAttractiveTypeCode() == attractiveTypeCode);
+            }
+
+            switch (sortCode) {
+                case 1:
+                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getModifyDate).reversed());
+                    break;
+                case 2:
+                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getModifyDate));
+                    break;
+                case 3:
+                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getFromInstaMemberLikes).reversed());
+
+                    break;
+                case 4:
+                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getFromInstaMemberLikes));
+                    break;
+                case 5:
+                    // likeablePeopleStream = likeablePeopleStream.sorted(??);
+                    break;
+                case 6:
+                    // likeablePeopleStream = likeablePeopleStream.sorted(??);
+                    break;
+
             }
 
             List<LikeablePerson> likeablePeople = likeablePeopleStream.collect(Collectors.toList());

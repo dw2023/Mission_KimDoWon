@@ -18,11 +18,11 @@
 #### 선택미션
 - [x] 1: `내가 받은 호감(/usr/likeablePerson/toList)`에서 호감사유 필터링 기능 구현
   - [x] `내가 받은 호감`에서 특정 호감사유의 호감만 필터링해서 보여주기
-- [ ] 2: `내가 받은 호감(/usr/likeablePerson/toList)`에서 정렬 기능 구현
-  - [ ] 최신순(default): 최근에 받은 호감표시를 우선적으로 표시
-  - [ ] 날짜순: 오래전에 받은 호감표시를 우선적으로 표시
-  - [ ] 인기 많은 순: 인기가 많은 사람의 호감표시를 우선적으로 표시
-  - [ ] 인기 적은 순: 인기가 적은 사람의 호감표시를 우선적으로 표시
+- [x] 2: `내가 받은 호감(/usr/likeablePerson/toList)`에서 정렬 기능 구현
+  - [x] 최신순(default): 최근에 받은 호감표시를 우선적으로 표시
+  - [x] 날짜순: 오래전에 받은 호감표시를 우선적으로 표시
+  - [x] 인기 많은 순: 인기가 많은 사람의 호감표시를 우선적으로 표시
+  - [x] 인기 적은 순: 인기가 적은 사람의 호감표시를 우선적으로 표시
   - [ ] 성별순
     - 여성 -> 남자
     - 2순위 정렬조건: 최신순
@@ -113,6 +113,16 @@ if (attractiveTypeCode != 0) {
 
 **[특이사항]**
 
+#### 선택미션2
+```java
+// 호감을 표시한 사람이 받은 호감 수를 가져오는 메서드
+    public int getFromInstaMemberLikes() {
+        if (fromInstaMember == null)
+            return 0;
+
+        return fromInstaMember.getToLikeablePeople().size();
+    }
+```
 
 
 <br/>
