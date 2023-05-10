@@ -52,8 +52,11 @@
 
 <br/>
 
-![img_9.png](img_9.png)
-
+```java
+if (gender != null) {
+                likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
+            }
+```
 (1) 위 코드처럼 if문의 조건을 `gender != null`로 하면,
 `/toList?gender=&attractiveTypeCode=&sortCode=1`의 gender 값이 null이 아니기 때문에 오류가 발생한다.
 
@@ -62,7 +65,11 @@
 
 (2) if문 조건을 `!gender.isEmpty()`로 입력하면, 해당 URL에서 전체 성별의 호감표시를 모두 볼 수 있다.
 
-![img_10.png](img_10.png)
+```java
+if (!gender.isEmpty()) {
+                likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
+            }
+```
 
 ![img_11.png](img_11.png)
 
@@ -70,19 +77,37 @@
 
 ![img_13.png](img_13.png)
 
-(3) 이중 if문을 사용하여 null 값 체크부터 먼저 해주면, 두 가지 URL에서 모두 잘 작동한다.
+(3) `@RequestParam(defaultValue = "")`로 gender의 디폴트값을 empty로 설정해주면, 두 가지 URL에서 모두 잘 작동한다.
 
-![img_12.png](img_12.png)
+```java
+public String showToList(Model model, @RequestParam(defaultValue = "") String gender, @RequestParam(defaultValue = "0") int attractiveTypeCode, @RequestParam(defaultValue = "1") int sortCode) {
+        InstaMember instaMember = rq.getMember().getInstaMember();
 
-- 이 미션을 수행하면서 `Null/ Empty/ Blank`의 차이에 대해 다시 확실히 알고 넘어갈 수 있어서 좋았다!
+        // 인스타인증을 했는지 체크
+        if (instaMember != null) {
+            // 해당 인스타회원이 좋아하는 사람들 목록
+            Stream<LikeablePerson> likeablePeopleStream = instaMember.getToLikeablePeople().stream();
+
+            if (!gender.isEmpty()) {
+                likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
+            }
+```
+
+- 이 미션을 수행하면서 `Null/ Empty/ Blank`의 차이에 대해 다시 확실히 알고 넘어갈 수 있어서 좋았다.
 - 참고자료: https://velog.io/@sixhustle/null-empty-blank
+
 ![img_14.png](img_14.png)
 
 
 <br/>
 
 #### 선택미션1
-![img.png](img.png)
+`내가 받은 호감(/usr/likeablePerson/toList)`에서 호감사유 필터링 기능 구현
+```java
+if (attractiveTypeCode != 0) {
+                likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getAttractiveTypeCode() == attractiveTypeCode);
+            }
+```
 
 <br/>
 
