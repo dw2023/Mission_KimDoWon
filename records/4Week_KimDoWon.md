@@ -23,10 +23,10 @@
   - [x] 날짜순: 오래전에 받은 호감표시를 우선적으로 표시
   - [x] 인기 많은 순: 인기가 많은 사람의 호감표시를 우선적으로 표시
   - [x] 인기 적은 순: 인기가 적은 사람의 호감표시를 우선적으로 표시
-  - [ ] 성별순
+  - [x] 성별순
     - 여성 -> 남자
     - 2순위 정렬조건: 최신순
-  - [ ] 호감사유순
+  - [x] 호감사유순
     - 외모 -> 성격 -> 능력
     - 2순위 정렬조건: 최신순
 - [ ] 3: 젠킨스를 이용한 자동 배포
@@ -122,8 +122,13 @@ if (attractiveTypeCode != 0) {
 
         return fromInstaMember.getToLikeablePeople().size();
     }
-```
 
+// 호감을 표시한 사람의 성별을 가져오는 메서드
+public String getFromInstaMemberGender() {
+        return fromInstaMember.getGender();
+        }
+```
+호감을 표시한 사람이 받은 호감 수와 성별을 바로 가져오기 위해 `LikeablePerson`에 메서드를 구현하여 사용하였는데, 다른 방법도 궁금하다.
 
 <br/>
 
@@ -131,3 +136,8 @@ if (attractiveTypeCode != 0) {
 
 필수미션1
 - gender의 null 값 체크를 Optional을 사용해서 해보기 (더 깔끔할 것 같다)
+
+<br/>
+
+선택미션3
+- 시간이 부족하여 젠킨스를 사용한 배포를 하지 못해서 리팩토링할 때 해봐야겠다.
