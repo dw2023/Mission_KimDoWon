@@ -139,6 +139,10 @@ public class LikeablePersonController {
                     likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getFromInstaMember().getGender().equals(gender));
             }
 
+            if (attractiveTypeCode != 0) {
+                likeablePeopleStream = likeablePeopleStream.filter(lp -> lp.getAttractiveTypeCode() == attractiveTypeCode);
+            }
+
             List<LikeablePerson> likeablePeople = likeablePeopleStream.collect(Collectors.toList());
 
             model.addAttribute("likeablePeople", likeablePeople);
