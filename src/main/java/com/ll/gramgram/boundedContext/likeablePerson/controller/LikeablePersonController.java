@@ -151,11 +151,11 @@ public class LikeablePersonController {
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getModifyDate));
                     break;
                 case 3:
-                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getFromInstaMemberLikes).reversed());
+                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(lp -> -lp.getFromInstaMember().getLikes()));
 
                     break;
                 case 4:
-                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getFromInstaMemberLikes));
+                    likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(lp -> lp.getFromInstaMember().getLikes()));
                     break;
                 case 5:
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getFromInstaMemberGender).reversed()

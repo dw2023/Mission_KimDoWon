@@ -27,14 +27,6 @@ public class LikeablePerson extends BaseEntity {
     private InstaMember fromInstaMember; // 호감을 표시한 사람(인스타 멤버)
     private String fromInstaMemberUsername; // 혹시 몰라서 기록
 
-    // 호감을 표시한 사람이 받은 호감 수를 가져오는 메서드
-    public int getFromInstaMemberLikes() {
-        if (fromInstaMember == null)
-            return 0;
-
-        return fromInstaMember.getToLikeablePeople().size();
-    }
-
     // 호감을 표시한 사람의 성별을 가져오는 메서드
     public String getFromInstaMemberGender() {
         return fromInstaMember.getGender();

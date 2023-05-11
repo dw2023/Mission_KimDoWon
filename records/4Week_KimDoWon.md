@@ -11,7 +11,7 @@
 - [x] 1: `내가 받은 호감(/usr/likeablePerson/toList)`에서 성별 필터링 기능 구현
   - [x] `내가 받은 호감`에서 특정 성별을 가진 사람에게서 받은 호감만 필터링해서 보여주기
 - [x] 2: 네이버 클라우드 플랫폼을 통한 배포 (지난 주에 완료함)
-  - [x] `https://dwk.add/` 로 접속 가능
+  - [x] `https://www.dwk.app/` 로 접속 가능
   - [x] 카카오, 네이버, 구글, 페이스북 소셜로그인 가능
   - [x] 인스타그램 ID 연결
 
@@ -133,6 +133,10 @@ public String getFromInstaMemberGender() {
 <br/>
 
 **[Refactoring]**
+
+- 테스트케이스를 작성하지 못함
+
+<br/>
 
 필수미션1
 - gender의 null 값 체크를 Optional을 사용해서 해보기 (더 깔끔할 것 같다)
