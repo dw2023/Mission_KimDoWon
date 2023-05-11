@@ -115,7 +115,7 @@ if (attractiveTypeCode != 0) {
 
 #### 선택미션2
 ![img.png](img.png)
-위 코드로 작성하면 에러가 남 (이유를 모르겠다)
+위 코드로 작성하면 `getFromInstaMember()`가 빨간색으로 표시되는 에러가 남 (원인 파악 중)
 
 ```java
 // 호감을 표시한 사람의 성별을 가져오는 메서드
@@ -136,4 +136,4 @@ public String getFromInstaMemberGender() {
 <br/>
 
 선택미션3
-- 시간이 부족하여 젠킨스를 사용한 배포를 하지 못했다. 리팩토링할 때 해봐야겠다.
+- 젠킨스를 사용한 자동배포
