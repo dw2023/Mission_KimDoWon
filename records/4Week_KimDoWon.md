@@ -114,34 +114,26 @@ if (attractiveTypeCode != 0) {
 **[특이사항]**
 
 #### 선택미션2
+![img.png](img.png)
+위 코드로 작성하면 에러가 남 (이유를 모르겠다)
+
 ```java
-// 호감을 표시한 사람이 받은 호감 수를 가져오는 메서드
-    public int getFromInstaMemberLikes() {
-        if (fromInstaMember == null)
-            return 0;
-
-        return fromInstaMember.getToLikeablePeople().size();
-    }
-
 // 호감을 표시한 사람의 성별을 가져오는 메서드
 public String getFromInstaMemberGender() {
         return fromInstaMember.getGender();
         }
 ```
-호감을 표시한 사람이 받은 호감 수와 성별을 바로 가져오기 위해 `LikeablePerson`에 메서드를 구현하여 사용하였는데, 다른 방법도 궁금하다.
+그래서 성별을 바로 가져오기 위해 `LikeablePerson`에 메서드를 구현하여 사용하였는데, 
+에러의 원인을 파악해서 이 코드를 없애고 싶다.
 
 <br/>
 
 **[Refactoring]**
 
 - 테스트케이스를 작성하지 못함
-
-<br/>
-
-필수미션1
-- gender의 null 값 체크를 Optional을 사용해서 해보기 (더 깔끔할 것 같다)
+- 성별&호감사유 필터링, 정렬 기능 코드를 Controller -> Service 로 리팩토링하기
 
 <br/>
 
 선택미션3
-- 시간이 부족하여 젠킨스를 사용한 배포를 하지 못해서 리팩토링할 때 해봐야겠다.
+- 시간이 부족하여 젠킨스를 사용한 배포를 하지 못했다. 리팩토링할 때 해봐야겠다.

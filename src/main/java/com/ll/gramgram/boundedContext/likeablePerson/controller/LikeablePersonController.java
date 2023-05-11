@@ -144,29 +144,27 @@ public class LikeablePersonController {
             }
 
             switch (sortCode) {
-                case 1:
+                case 1: // 최신순(기본)
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getModifyDate).reversed());
                     break;
-                case 2:
+                case 2: // 날짜순
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getModifyDate));
                     break;
-                case 3:
+                case 3: // 인기 많은 순
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(lp -> -lp.getFromInstaMember().getLikes()));
-
                     break;
-                case 4:
+                case 4: // 인기 적은 순
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(lp -> lp.getFromInstaMember().getLikes()));
                     break;
-                case 5:
+                case 5: // 성별순
+                    // likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(lp -> lp.getFromInstaMember().getGender()).reversed());
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getFromInstaMemberGender).reversed()
                             .thenComparing(LikeablePerson::getModifyDate, Comparator.reverseOrder()));
-
                     break;
-                case 6:
+                case 6: // 호감사유순
                     likeablePeopleStream = likeablePeopleStream.sorted(Comparator.comparing(LikeablePerson::getAttractiveTypeCode)
                             .thenComparing(LikeablePerson::getModifyDate, Comparator.reverseOrder()));
                     break;
-
             }
 
             List<LikeablePerson> likeablePeople = likeablePeopleStream.collect(Collectors.toList());
